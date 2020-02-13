@@ -9,7 +9,17 @@ Class {
 
 { #category : #loopsDetect }
 InfiniteLoopDetector >> detectLoop: aBlockClosure [ 
-	debugger := SindarinDebugger debug: aBlockClosure 
+	| lastSF |
+	debugger := SindarinDebugger debug: aBlockClosure.
+	lastSF := thisContext.
+	self halt.
+	[ debugger context selector = lastSF selector ]
+	whileFalse: [ 
+		self halt.
+		debugger step.
+		lastSF := debugger context
+	].
+	self halt.
 ]
 
 { #category : #loopsDetect }
