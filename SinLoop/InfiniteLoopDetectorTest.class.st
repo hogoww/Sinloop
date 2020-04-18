@@ -19,6 +19,7 @@ InfiniteLoopDetectorTest >> setUp [
 
 { #category : #tests }
 InfiniteLoopDetectorTest >> testSimpleWhileTrue [
+	self error: 'we use whileTrue in the test, which is a compiler special method. cannot work'.
 	detector detectLoop: [ self methodLoopingInfinitelyInWhileTrue ].
 	self assert: detector foundLoop
 ]
